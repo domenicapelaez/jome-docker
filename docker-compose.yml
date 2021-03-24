@@ -1,0 +1,34 @@
+version: '3.8'
+services:
+  ftp:
+    container_name: ftp
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    environment: 
+      - USUARIO=jome
+      - PASSWD=jome
+    ports: 
+      - "8080:80"
+      - "20:20"
+      - "21:21"
+    networks: 
+      riot:
+          ipv4_address: 180.170.160.10
+  mysql:
+    container_name: mysql
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    environment: 
+      - USUARIO=jome
+      - PASSWD=jome
+    networks: 
+      riot:
+          ipv4_address: 180.170.160.20
+networks: 
+  riot:
+      ipam: 
+          driver: default
+          config: 
+              - subnet: 180.170.160.0/24
